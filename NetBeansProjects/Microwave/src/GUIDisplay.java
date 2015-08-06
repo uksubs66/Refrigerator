@@ -55,9 +55,9 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
         private GUIButton doorOpener = new DoorOpenButton("open door");
         private GUIButton coolButton = new CoolButton("cool");
         private JLabel doorStatus = new JLabel("Door Closed");
-        private JLabel timerValue = new JLabel("            ");
+        private JLabel tempValue = new JLabel("            ");
         private JLabel lightStatus = new JLabel("Light Off");
-        private JLabel coolingStatus = new JLabel("Not cooling");
+        private JLabel coolingStatus = new JLabel("Idle");
 
         private JTextField roomTempInput = new JTextField();
         private JTextField fridgeInput = new JTextField();
@@ -66,8 +66,8 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
         private JPanel bottomPanel = new JPanel(new GridLayout(4, 2));
         private JLabel roomLabel = new JLabel("Room temp (50-100)");
         private JLabel fridgeLabel = new JLabel("Desired fidge temp (37-41)");
-        private JButton setRoomTemp = new JButton("Set room temp");
-        private JButton setFridgeTemp = new JButton("Set desired fridge temp");
+        private JButton setRoom = new JButton("Set room temp");
+        private JButton setFridge = new JButton("Set desired fridge temp");
 
         /**
          * Set up the JFrame
@@ -78,8 +78,8 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
             topPanel.add(fridgeLabel);
             topPanel.add(roomTempInput);
             topPanel.add(fridgeInput);
-            topPanel.add(setRoomTemp);
-            topPanel.add(setFridgeTemp);
+            topPanel.add(setRoom);
+            topPanel.add(setFridge);
  
             midPanel.add(doorOpener);
             midPanel.add(doorCloser);
@@ -87,23 +87,22 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
 
             bottomPanel.add(doorStatus);
             bottomPanel.add(lightStatus);
-            bottomPanel.add(timerValue);
+            bottomPanel.add(tempValue);
             bottomPanel.add(coolingStatus);
 
             getContentPane().add(midPanel);
             getContentPane().add(bottomPanel, BorderLayout.SOUTH);
             getContentPane().add(topPanel, BorderLayout.NORTH);
-//			getContentPane().setLayout(new FlowLayout());
-//			getContentPane().add(doorStatus);
-//			getContentPane().add(lightStatus);
-//			getContentPane().add(timerValue);
-//			getContentPane().add(coolingStatus);
-//			getContentPane().add(doorCloser);
-//			getContentPane().add(doorOpener);
-//			getContentPane().add(coolButton);
             doorCloser.addActionListener(GUIDisplay.this);
             doorOpener.addActionListener(GUIDisplay.this);
             coolButton.addActionListener(GUIDisplay.this);
+            
+            roomTempInput.addActionListener(GUIDisplay.this);
+            setRoom.addActionListener(GUIDisplay.this);
+            fridgeInput.addActionListener(GUIDisplay.this);
+            setFridge.addActionListener(GUIDisplay.this);
+
+
             pack();
             setVisible(true);
         }
@@ -153,8 +152,8 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
      * Display the remaining cool time
      */
     @Override
-    public void displayTimeRemaining(int value) {
-        frame.timerValue.setText(" " + value);
+    public void displayFridgeTemp(int value) {
+        frame.tempValue.setText(" " + value);
     }
 
     /**
@@ -169,9 +168,10 @@ public class GUIDisplay extends RefrigeratorDisplay implements ActionListener {
      * Display a text indicating that cooling has ended
      */
     @Override
-    public void notCooling() {
-        frame.coolingStatus.setText("Not cooling");
+    public void nowIdle() {
+        frame.coolingStatus.setText("Idle");
     }
+
 
     /**
      * Start the whole show

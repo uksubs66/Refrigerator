@@ -64,7 +64,7 @@ public class CoolingState extends RefrigeratorState implements
 	@Override
 	public void coolRequested(CoolRequestEvent event) {
 		Timer.instance().addTimeValue(10);
-		display.displayTimeRemaining(Timer.instance().getTimeValue());
+		display.displayFridgeTemp(Timer.instance().getTimeValue());
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class CoolingState extends RefrigeratorState implements
 	 */
 	@Override
 	public void timerTicked(TimerTickedEvent event) {
-		display.displayTimeRemaining(Timer.instance().getTimeValue());
+		display.displayFridgeTemp(Timer.instance().getTimeValue());
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class CoolingState extends RefrigeratorState implements
 	 */
 	@Override
 	public void timerRanOut(TimerRanOutEvent event) {
-		display.displayTimeRemaining(Timer.instance().getTimeValue());
+		display.displayFridgeTemp(Timer.instance().getTimeValue());
 		context.changeCurrentState(DoorClosedState.instance());
 	}
 
@@ -99,6 +99,7 @@ public class CoolingState extends RefrigeratorState implements
 	 */
 	@Override
 	public void run() {
+                
 		DoorOpenManager.instance().addDoorOpenListener(this);
 		CoolRequestManager.instance().addCoolRequestListener(this);
 		TimerRanOutManager.instance().addTimerRanOutListener(this);
@@ -106,6 +107,6 @@ public class CoolingState extends RefrigeratorState implements
 		display.turnLightOn();
 		Timer.instance().setTimeValue(10);
 		display.startCooling();
-		display.displayTimeRemaining(Timer.instance().getTimeValue());
+		display.displayFridgeTemp(Timer.instance().getTimeValue());
 	}
 }

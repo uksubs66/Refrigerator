@@ -51,7 +51,7 @@ public abstract class RefrigeratorDisplay extends Observable {
 		context.initialize();
 	}
 
-	public abstract void displayTimeRemaining(int time);
+	public abstract void displayFridgeTemp(int temp);
 
 	/**
 	 * Indicate that the light is on
@@ -81,5 +81,5 @@ public abstract class RefrigeratorDisplay extends Observable {
 	/**
 	 * indicate that cooling has ended
 	 */
-	public abstract void notCooling();
+	public abstract void nowIdle();
 }

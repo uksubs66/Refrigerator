@@ -80,12 +80,13 @@ public class DoorClosedState extends RefrigeratorState implements
 	 */
 	@Override
 	public void run() {
+            System.out.println("wsws");
 		CoolRequestManager.instance().addCoolRequestListener(instance);
 		DoorOpenManager.instance().addDoorOpenListener(instance);
 		display.doorClosed();
 		display.turnLightOff();
-		display.notCooling();
-		display.displayTimeRemaining(0);
+		display.nowIdle();
+		display.displayFridgeTemp(0);
 		Timer.instance().setTimeValue(0);
 	}
 }

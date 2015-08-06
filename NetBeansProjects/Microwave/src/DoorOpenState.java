@@ -68,9 +68,9 @@ public class DoorOpenState extends RefrigeratorState implements DoorCloseListene
 	public void run() {
 		DoorCloseManager.instance().addDoorCloseListener(this);
 		display.turnLightOn();
-		display.notCooling();
+		display.nowIdle();
 		display.doorOpened();
-		display.displayTimeRemaining(0);
+		display.displayFridgeTemp(0);
 	}
 
 }

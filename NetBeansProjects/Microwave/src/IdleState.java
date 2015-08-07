@@ -1,3 +1,5 @@
+
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -23,15 +25,15 @@
  * After that, when an event occurs, the handle method is invoked.
  *
  */
-public class CoolingState extends RefrigeratorState implements
+public class IdleState extends RefrigeratorState implements
 		CoolRequestListener, TimerRanOutListener, TimerTickedListener,
 		DoorOpenListener {
-	private static CoolingState instance;
+	private static IdleState instance;
 
 	/**
 	 * Private for the singleton pattern
 	 */
-	private CoolingState() {
+	private IdleState() {
 	}
 
 	/**
@@ -51,9 +53,9 @@ public class CoolingState extends RefrigeratorState implements
 	 * 
 	 * @return the object
 	 */
-	public static CoolingState instance() {
+	public static IdleState instance() {
 		if (instance == null) {
-			instance = new CoolingState();
+			instance = new IdleState();
 		}
 		return instance;
 	}

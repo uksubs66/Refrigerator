@@ -75,8 +75,10 @@ public class Temp implements Observer {
 	 * @param value
 	 *            extra time for the time value
 	 */
-	public void addTempValue(int value) {
-		tempValue += value;
+	public void coolingTemp() {
+		
+                tempValue -= (setRoom / coolRate);
+            //tempValue += value;
 	}
 
 	/**
@@ -93,7 +95,6 @@ public class Temp implements Observer {
 	 */
 	@Override
 	public void update(Observable clock, Object value) {
-            tempValue -= (setRoom / coolRate);
 		if (tempValue > (setTemp + startDiff)) {
 			TempCoolManager.instance().processEvent(
 					new TempCoolEvent(instance));

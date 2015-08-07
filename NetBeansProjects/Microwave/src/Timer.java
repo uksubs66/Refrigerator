@@ -82,7 +82,7 @@ public class Timer implements Observer {
 	 */
 	@Override
 	public void update(Observable clock, Object value) {
-            System.out.println("BF:"+timeValue);
+
 		if (--timeValue == 0) {
                     System.out.println("RO:"+timeValue);
 			TimerRanOutManager.instance().processEvent(
